@@ -3,6 +3,7 @@ package me.gadse.antiseedcracker;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 
+import com.google.common.collect.Lists;
 import me.gadse.antiseedcracker.commands.AntiSeedCrackerCommand;
 import me.gadse.antiseedcracker.listeners.DragonRespawnSpikeModifier;
 import me.gadse.antiseedcracker.listeners.EndCityModifier;
@@ -108,7 +109,7 @@ public final class AntiSeedCracker extends JavaPlugin implements CommandExecutor
     }
 
     // https://minecraft.wiki/w/End_spike
-    private final List<Integer> spikeHeights = List.of(76, 79, 82, 85, 88, 91, 94, 97, 100, 103);
+    private final List<Integer> spikeHeights = Lists.newArrayList(76, 79, 82, 85, 88, 91, 94, 97, 100, 103);
 
     public void modifyEndSpikes(World world) {
         if (world.getEnvironment() != World.Environment.THE_END

@@ -12,16 +12,17 @@ repositories {
         url = 'https://repo.papermc.io/repository/maven-public/'
     }
     maven {
-        url = "https://repo.dmulloy2.net/repository/public/"
+        url = "https://jitpack.io/"
     }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.21-R0.1-SNAPSHOT'
-    compileOnly 'com.comphenix.protocol:ProtocolLib:5.1.0'
+    compileOnly 'org.jetbrains:annotations:24.0.0'
+    compileOnly 'com.github.dmulloy2:ProtocolLib:5.3.0'
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 8
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
@@ -38,10 +39,9 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 processResources {
-    def props = [version: version]
-    inputs.properties props
-    filteringCharset 'UTF-8'
-    filesMatching('plugin.yml') {
-        expand props
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    from(sourceSets.main.resources.srcDirs) {
+        expand("version": version)
+        include("plugin.yml")
     }
 }
